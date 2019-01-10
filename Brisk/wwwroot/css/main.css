@@ -32,3 +32,7 @@ a {
     color: #008000;
     text-decoration: none;
 }
+
+.short {
+    width: 75px;
+}

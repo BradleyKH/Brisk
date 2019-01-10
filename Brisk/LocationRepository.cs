@@ -10,7 +10,7 @@ namespace Brisk
     public class LocationRepository
     {
 
-        private static string connectionString = Environment.GetEnvironmentVariable("MySQLConnStr");
+        private static string connectionString = Environment.GetEnvironmentVariable("SQL_CONN");
 
         public static Location GetLocationById(int id)
         {

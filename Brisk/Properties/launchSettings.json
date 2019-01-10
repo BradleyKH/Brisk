@@ -12,11 +12,9 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "FORECAST_URL": "http://api.openweathermap.org/data/2.5/forecast?zip=",
-        "MySQLConnStr": "Server=localhost;Database=brisk;Uid=root;Pwd=dbpassword1;",
         "WEATHER_API": "&APPID=0001bab24c278f2cfc3c0814e5a5bdfa",
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "CURRENT_URL": "http://api.openweathermap.org/data/2.5/weather?zip="
+        "SQL_CONN": "Server=localhost;Database=brisk;Uid=root;Pwd=dbpassword1;",
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Brisk": {

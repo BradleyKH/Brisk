@@ -16,6 +16,29 @@ namespace Brisk.Controllers
             return View();
         }
 
+        public IActionResult Search(int zip)
+        {
+            var svm = new SearchViewModel();
+            var result = Helpers.GetWeatherByZip(zip);
+            var code = Convert.ToInt32(Helpers.Parse(result, "cod"));
+            if (code == 200)
+            {
+                var r = new Report()
+                {
+                    City = Helpers.Parse(result, "name"),
+                    CurrentTemp = Helpers.KToF(Helpers.Parse(result, "main", "temp")),
+                    Humidity = Convert.ToInt32(Helpers.Parse(result, "main", "humidity")),
+                    Icon = Helpers.GetIcon(result),
+                    WeatherCode = Helpers.GetWeatherCode(result),
+                    Description = Helpers.GetDescription(result)
+                };
+
+                svm.Current = r;
+            }
+
+            return View(svm);
+        }
+
         public IActionResult Favorites()
         {
             var fvm = new FavViewModel()
@@ -35,9 +58,9 @@ namespace Brisk.Controllers
                     {
                         City = Helpers.Parse(result, "name"),
                         CurrentTemp = Helpers.KToF(Helpers.Parse(result, "main", "temp")),
-                        HighTemp = Helpers.KToF(Helpers.Parse(result, "main", "temp_max")),
-                        LowTemp = Helpers.KToF(Helpers.Parse(result, "main", "temp_min")),
                         Humidity = Convert.ToInt32(Helpers.Parse(result, "main", "humidity")),
+                        Icon = Helpers.GetIcon(result),
+                        WeatherCode = Helpers.GetWeatherCode(result),
                         Description = Helpers.GetDescription(result)
                     };
 
@@ -60,7 +83,13 @@ namespace Brisk.Controllers
             };
 
             LocationRepository.CreateLocation(l);
-            return RedirectToAction("Index");
+            return RedirectToAction("Favorites");
+        }
+
+        public IActionResult Forecast(int zip)
+        {
+
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

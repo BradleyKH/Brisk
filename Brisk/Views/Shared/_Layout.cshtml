@@ -12,11 +12,16 @@
         <div class="navbar">
 
             <div id="title">Brisk</div>
-            <div id="subtitle">an elegant weather app for a more civilized age</div>
-
+            <div>
+                @using (Html.BeginForm("Search", "Home", "POST"))
+                {
+                    <input type="number" name="zip" size="5" placeholder="Zip Code" class="short" />
+                    <button type="submit">GO</button>
+                }
+            </div>
             <nav>
                 <ul class="navLinks">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Search</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Local</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Favorites">Favorites</a></li>
                 </ul>
             </nav>

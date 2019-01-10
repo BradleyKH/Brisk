@@ -1,0 +1,14 @@
+﻿@model Brisk.Models.ViewModels.SearchViewModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<strong>@Model.Current.City</strong>
+<img src="@Model.Current.Icon" />
+<ul>
+    <li>Current Temp: @Model.Current.CurrentTemp<span>ºF</span></li>
+    <li>Humidity: @Model.Current.Humidity<span>%</span></li>
+    <li>Description: @Model.Current.Description</li>
+    <li>Code: @Model.Current.WeatherCode</li>
+</ul>

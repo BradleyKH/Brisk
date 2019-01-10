@@ -12,6 +12,8 @@ namespace Brisk
         public int HighTemp { get; set; }
         public int LowTemp { get; set; }
         public int Humidity { get; set; }
+        public int WeatherCode { get; set; }
+        public string Icon { get; set; }
         public string Description { get; set; }
     }
 }

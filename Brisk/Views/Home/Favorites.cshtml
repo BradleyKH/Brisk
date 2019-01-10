@@ -15,17 +15,13 @@
 
 @for (int i = 0; i < Model.Locations.Count; i++)
 {
-<strong>@Model.Locations[i].Name</strong>
-<ul>
-    <li>@Model.Reports[i].City (@Model.Locations[i].Zip)</li>
-    <li>Temp</li>
+    <strong>@Model.Locations[i].Name</strong>
+    <img src="@Model.Reports[i].Icon" />
     <ul>
-        <li>Current: @Model.Reports[i].CurrentTemp<span>ºF</span></li>
-        <li>High: @Model.Reports[i].HighTemp<span>ºF</span></li>
-        <li>Low: @Model.Reports[i].LowTemp<span>ºF</span></li>
+        <li>@Model.Reports[i].City (@Model.Locations[i].Zip)</li>
+        <li>Current Temp: @Model.Reports[i].CurrentTemp<span>ºF</span></li>
         <li>Humidity: @Model.Reports[i].Humidity<span>%</span></li>
         <li>Description: @Model.Reports[i].Description</li>
+        <li>Code: @Model.Reports[i].WeatherCode</li>
     </ul>
-
-</ul>
-}
+}   

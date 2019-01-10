@@ -3,6 +3,14 @@
     ViewData["Title"] = "Index";
 }
 
-<input type="number" name="zipcode" placeholder="Enter zip code"/>
-<button type="button">SUBMIT</button>
+@section Scripts
+    {
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            getLocation();
+        });
+    </script>
+}
 
+<input type="hidden" id="lat" value="" readonly /><br />
+<input type="hidden" id="long" value="" readonly />
