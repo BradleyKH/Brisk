@@ -7,6 +7,6 @@ namespace Brisk.Models.ViewModels
 {
     public class SearchViewModel
     {
-        public Report Current { get; set; }
+        public CurrentReport Current { get; set; }
     }
 }

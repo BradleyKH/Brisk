@@ -12,3 +12,10 @@
     <li>Description: @Model.Current.Description</li>
     <li>Code: @Model.Current.WeatherCode</li>
 </ul>
+
+@using (Html.BeginForm("Forecast", "Home", "POST"))
+{
+    <input type="hidden" name="lat" value="@Model.Current.Latitude" />
+    <input type="hidden" name="lon" value="@Model.Current.Longtitude" />
+    <button type="submit">Get 5-Day Forecast</button>
+}

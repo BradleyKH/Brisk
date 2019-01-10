@@ -7,6 +7,9 @@ namespace Brisk.Models
 {
     public class Forecast
     {
-        public static List<Report> FiveDay { get; set; }
+        public string City { get; set; }
+        public double Latitude { get; set; }
+        public double Longtitude { get; set; }
+        public List<ForecastReport> Reports { get; set; }
     }
 }

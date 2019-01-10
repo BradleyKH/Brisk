@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Brisk.Models.ViewModels
 {
-    public class Forecast
+    public class ForecastViewModel
     {
+        public Forecast FiveDay { get; set; }
     }
 }

@@ -22,19 +22,7 @@ namespace Brisk.Controllers
             var result = Helpers.GetWeatherByZip(zip);
             var code = Convert.ToInt32(Helpers.Parse(result, "cod"));
             if (code == 200)
-            {
-                var r = new Report()
-                {
-                    City = Helpers.Parse(result, "name"),
-                    CurrentTemp = Helpers.KToF(Helpers.Parse(result, "main", "temp")),
-                    Humidity = Convert.ToInt32(Helpers.Parse(result, "main", "humidity")),
-                    Icon = Helpers.GetIcon(result),
-                    WeatherCode = Helpers.GetWeatherCode(result),
-                    Description = Helpers.GetDescription(result)
-                };
-
-                svm.Current = r;
-            }
+                svm.Current = Helpers.GenerateCurrentReport(result);
 
             return View(svm);
         }
@@ -46,7 +34,7 @@ namespace Brisk.Controllers
                 Locations = LocationRepository.GetLocations()
             };
             
-            var reports = new List<Report>();
+            var reports = new List<CurrentReport>();
 
             for (int i = 0; i < fvm.Locations.Count; i++)
             {
@@ -54,16 +42,7 @@ namespace Brisk.Controllers
                 var code = Convert.ToInt32(Helpers.Parse(result, "cod"));
                 if (code == 200)
                 {
-                    var r = new Report()
-                    {
-                        City = Helpers.Parse(result, "name"),
-                        CurrentTemp = Helpers.KToF(Helpers.Parse(result, "main", "temp")),
-                        Humidity = Convert.ToInt32(Helpers.Parse(result, "main", "humidity")),
-                        Icon = Helpers.GetIcon(result),
-                        WeatherCode = Helpers.GetWeatherCode(result),
-                        Description = Helpers.GetDescription(result)
-                    };
-
+                    var r = Helpers.GenerateCurrentReport(result);
                     reports.Add(r);
                 }
             }
@@ -86,10 +65,16 @@ namespace Brisk.Controllers
             return RedirectToAction("Favorites");
         }
 
-        public IActionResult Forecast(int zip)
+        public IActionResult Forecast(double lat, double lon)
         {
+            var fvm = new ForecastViewModel();
+            var result = Helpers.GetForecastByCoords(lat, lon);
+            var code = Convert.ToInt32(Helpers.Parse(result, "cod"));
 
-            return View();
+            if (code == 200)
+                fvm.FiveDay = Helpers.GenerateForecast(result);
+            
+            return View(fvm);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

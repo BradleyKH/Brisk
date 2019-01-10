@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Favorites";
 }
-
+<strong>Add a favorite location:</strong><br />
 @using (Html.BeginForm("CreateFavorite", "Home", "POST"))
 {
-<input type="number" id="locationZip" value="" name="zip" max="99999" placeholder="Enter Zip Code" />
-<input type="text" id="locationName" value="" name="name" placeholder="Enter Label (e.g. Home)" />
-<button type="submit">ADD</button>
+    <input type="number" id="locationZip" value="" name="zip" max="99999" placeholder="Enter Zip Code" /> <br />
+    <input type="text" id="locationName" value="" name="name" placeholder="Enter Label (e.g. Home)" /><br />
+    <button type="submit">ADD</button>
 }
 
 <br /><br />
@@ -24,4 +24,10 @@
         <li>Description: @Model.Reports[i].Description</li>
         <li>Code: @Model.Reports[i].WeatherCode</li>
     </ul>
+    @using (Html.BeginForm("Forecast", "Home", "POST"))
+    {
+        <input type="hidden" name="lat" value="@Model.Reports[i].Latitude" />
+        <input type="hidden" name="lon" value="@Model.Reports[i].Longtitude" />
+        <button type="submit">Get 5-Day Forecast</button>
+    }
 }   

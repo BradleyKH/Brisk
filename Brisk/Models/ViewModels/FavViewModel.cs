@@ -8,6 +8,6 @@ namespace Brisk.Models.ViewModels
     public class FavViewModel
     {
         public List<Location> Locations { get; set; }
-        public List<Report> Reports { get; set; }
+        public List<CurrentReport> Reports { get; set; }
     }
 }
