@@ -26,7 +26,7 @@ namespace Brisk
         public static string GetWeatherByCoords(double latitude, double longtitude)
         {
             var client = new WebClient();
-            return client.DownloadString(currentURL + "lat=" + latitude + "&lon=" + longtitude);
+            return client.DownloadString(currentURL + "lat=" + latitude + "&lon=" + longtitude + api);
         }
 
         public static string GetForecastByZip(int zipcode)

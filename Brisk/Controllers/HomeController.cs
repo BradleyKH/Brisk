@@ -16,6 +16,18 @@ namespace Brisk.Controllers
             return View();
         }
 
+        public IActionResult Local(double latitude, double longtitude)
+        {
+            var svm = new SearchViewModel();
+            var result = Helpers.GetWeatherByCoords(latitude, longtitude);
+            var code = Convert.ToInt32(Helpers.Parse(result, "cod"));
+
+            if (code == 200)
+                svm.Current = Helpers.GenerateCurrentReport(result);
+
+            return View(svm);
+        }
+
         public IActionResult Search(int zip)
         {
             var svm = new SearchViewModel();
