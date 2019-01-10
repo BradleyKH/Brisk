@@ -1,7 +1,7 @@
-﻿{
+{
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:64049",
       "sslPort": 44381
@@ -12,16 +12,20 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "FORECAST_URL": "http://api.openweathermap.org/data/2.5/forecast?zip=",
+        "MySQLConnStr": "Server=localhost;Database=brisk;Uid=root;Pwd=dbpassword1;",
+        "WEATHER_API": "&APPID=0001bab24c278f2cfc3c0814e5a5bdfa",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CURRENT_URL": "http://api.openweathermap.org/data/2.5/weather?zip="
       }
     },
     "Brisk": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
   }
 }

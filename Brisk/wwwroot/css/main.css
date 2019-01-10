@@ -1,0 +1,34 @@
+BODY {
+    font-family: Arial
+}
+
+#title {
+    font-size: 32px;
+    margin: 10px;
+}
+
+#subtitle {
+    font-size: 18px;
+    color: gray;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+UL.navLinks {
+    display: flex;
+    list-style-type: none;
+}
+
+ul.navLinks li {
+    padding: 10px;
+}
+
+a {
+    color: #008000;
+    text-decoration: none;
+}
