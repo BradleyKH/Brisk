@@ -24,6 +24,7 @@ namespace Brisk.Controllers
 
             if (code == 200)
                 svm.Current = Helpers.GenerateCurrentReport(result);
+            // Need to handle unsuccessful queries
 
             return View(svm);
         }
@@ -35,6 +36,7 @@ namespace Brisk.Controllers
             var code = Convert.ToInt32(Helpers.Parse(result, "cod"));
             if (code == 200)
                 svm.Current = Helpers.GenerateCurrentReport(result);
+            // Need to handle unsuccessful queries
 
             return View(svm);
         }
@@ -57,6 +59,8 @@ namespace Brisk.Controllers
                     var r = Helpers.GenerateCurrentReport(result);
                     reports.Add(r);
                 }
+                // Need to handle unsuccessful queries
+
             }
 
             fvm.Reports = reports;
@@ -68,7 +72,7 @@ namespace Brisk.Controllers
         {
             var l = new Location()
             {
-                Creator = 1,
+                Creator = 1, // Change to user ID when user management implemented
                 Zip = zip,
                 Name = name
             };
@@ -85,7 +89,8 @@ namespace Brisk.Controllers
 
             if (code == 200)
                 fvm.FiveDay = Helpers.GenerateForecast(result);
-            
+            // Need to handle unsuccessful queries
+
             return View(fvm);
         }
 

@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
+using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
-using GeoCoordinatePortable;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Brisk.Models;
 
 namespace Brisk
@@ -56,46 +55,49 @@ namespace Brisk
             return JObject.Parse(input)[key].ToString();
         }
 
-        public static CurrentReport GenerateCurrentReport(string result)
+        public static CurrentReport GenerateCurrentReport(string input)
         {
+            var result = JsonConvert.DeserializeObject<dynamic>(input);
             var r = new CurrentReport()
             {
-                City = JObject.Parse(result)["name"].ToString(),
-                Latitude = Convert.ToDouble(JObject.Parse(result)["coord"]["lat"]),
-                Longtitude = Convert.ToDouble(JObject.Parse(result)["coord"]["lon"]),
-                CurrentTemp = KToF(JObject.Parse(result)["main"]["temp"].ToString()),
-                Humidity = Convert.ToInt32(JObject.Parse(result)["main"]["humidity"]),
-                Icon = "http://openweathermap.org/img/w/" + JObject.Parse(result)["weather"][0]["icon"].ToString() + ".png",
-                WeatherCode = Convert.ToInt32(JObject.Parse(result)["weather"][0]["id"].ToString()),
-                Description = JObject.Parse(result)["weather"][0]["description"].ToString()
+                City = result["name"].ToString(),
+                Latitude = Convert.ToDouble(result["coord"]["lat"]),
+                Longtitude = Convert.ToDouble(result["coord"]["lon"]),
+                CurrentTemp = KToF(result["main"]["temp"].ToString()),
+                Humidity = Convert.ToInt32(result["main"]["humidity"]),
+                Icon = "http://openweathermap.org/img/w/" + result["weather"][0]["icon"].ToString() + ".png",
+                WeatherCode = Convert.ToInt32(result["weather"][0]["id"].ToString()),
+                Description = result["weather"][0]["description"].ToString()
             };
 
             return r;
         }
 
-        public static Forecast GenerateForecast(string result)
+        public static Forecast GenerateForecast(string input)
         {
-            var rawResult = JsonConvert.DeserializeObject<dynamic>(result);
-            var rawList = rawResult["list"];
+            var result = JsonConvert.DeserializeObject<dynamic>(input);
+            var list = result["list"];
             var forecast = new Forecast()
             {
-                City = rawResult["city"]["name"].ToString(),
-                Latitude = Convert.ToDouble(rawResult["city"]["coord"]["lat"]),
-                Longtitude = Convert.ToDouble(rawResult["city"]["coord"]["lon"])
+                City = result["city"]["name"].ToString(),
+                Latitude = Convert.ToDouble(result["city"]["coord"]["lat"]),
+                Longtitude = Convert.ToDouble(result["city"]["coord"]["lon"])
             };
 
             var reports = new List<ForecastReport>();
             
-            for (int i = 0; i < 40; i++)
+            for (int i = 0; i < 39; i++)
             {
+                DateTime dtUTC = DateTime.SpecifyKind(DateTime.Parse(list[i]["dt_txt"].ToString()), DateTimeKind.Utc);
+
                 var r = new ForecastReport()
                 {
-                    CurrentTemp = KtoF(Convert.ToDouble(rawList[i]["main"]["temp"])),
-                    Humidity = Convert.ToInt32(rawList[i]["main"]["humidity"]),
-                    WeatherCode = Convert.ToInt32(rawList[i]["weather"][0]["id"]),
-                    Icon = "http://openweathermap.org/img/w/" + rawList[i]["weather"][0]["icon"].ToString() + ".png",
-                    Description = rawList[i]["weather"][0]["description"].ToString(),
-                    Time = rawList[i]["dt_txt"].ToString()
+                    CurrentTemp = KtoF(Convert.ToDouble(list[i]["main"]["temp"])),
+                    Humidity = Convert.ToInt32(list[i]["main"]["humidity"]),
+                    WeatherCode = Convert.ToInt32(list[i]["weather"][0]["id"]),
+                    Icon = "http://openweathermap.org/img/w/" + list[i]["weather"][0]["icon"].ToString() + ".png",
+                    Description = list[i]["weather"][0]["description"].ToString(),
+                    DateTime = dtUTC.ToLocalTime()
                 };
 
                 reports.Add(r);

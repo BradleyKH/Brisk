@@ -49,7 +49,7 @@ namespace Brisk
                 conn.Open();
 
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT id, creator, zip, name FROM locations ORDER BY zip;";
+                cmd.CommandText = "SELECT id, creator, zip, name FROM locations ORDER BY name;";
 
                 var reader = cmd.ExecuteReader();
 

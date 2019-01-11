@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "WEATHER_API": "&APPID=0001bab24c278f2cfc3c0814e5a5bdfa",
-        "SQL_CONN": "Server=localhost;Database=brisk;Uid=root;Pwd=dbpassword1;",
+        "SQL_CONN": "Server=den1.mysql1.gear.host;Database=brisk;Uid=brisk;Pwd=Um1t?X8Apm1?;",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

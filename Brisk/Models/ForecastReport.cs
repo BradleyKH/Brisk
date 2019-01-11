@@ -12,6 +12,8 @@ namespace Brisk.Models
         public int WeatherCode { get; set; }
         public string Icon { get; set; }
         public string Description { get; set; }
-        public string Time { get; set; }
+        public DateTime DateTime { get; set; }
+        public int Time { get; set; }
+        public string Date { get; set; }
     }
 }
